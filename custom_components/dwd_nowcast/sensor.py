@@ -154,8 +154,8 @@ class DwdNowcastSensor(CoordinatorEntity, SensorEntity):
             "max_precipitation": max(mmh_values) if mmh_values else None,
             "next_rain_in_min": next_rain,
             # --- Debug / Nachvollziehbarkeit ---
-            "last_update": dt_util.as_local(self.coordinator.last_update_success_time).isoformat()
-            if getattr(self.coordinator, "last_update_success_time", None)
+            "last_update": dt_util.as_local(data["fetched_at"]).isoformat()
+            if data.get("fetched_at")
             else None,
             "data_timestamp": dt_util.as_local(ts).isoformat() if ts else None,
             "coordinate": [self.coordinator.latitude, self.coordinator.longitude],

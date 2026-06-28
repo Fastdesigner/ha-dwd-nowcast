@@ -8,6 +8,7 @@ from datetime import timedelta
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator, UpdateFailed
+from homeassistant.util import dt as dt_util
 
 from .const import (
     CONF_HORIZON_MINUTES,
@@ -47,8 +48,10 @@ class DwdNowcastCoordinator(DataUpdateCoordinator):
 
     async def _async_update_data(self) -> dict:
         try:
-            return await self.hass.async_add_executor_job(
+            result = await self.hass.async_add_executor_job(
                 fetch_rv_series, self.latitude, self.longitude, self.leads
             )
         except Exception as err:  # noqa: BLE001
             raise UpdateFailed(str(err)) from err
+        result["fetched_at"] = dt_util.utcnow()
+        return result
