@@ -56,16 +56,8 @@ class DwdNowcastConfigFlow(ConfigFlow, domain=DOMAIN):
 
     VERSION = 1
 
-    async def async_step_user(
-        self, user_input: dict[str, Any] | None = None
-    ) -> ConfigFlowResult:
-        await self.async_set_unique_id(DOMAIN)
-        self._abort_if_unique_id_configured()
-
-        if user_input is not None:
-            return self.async_create_entry(title=TITLE, data=user_input)
-
-        defaults = {
+    def _default_data(self) -> dict[str, Any]:
+        return {
             CONF_LATITUDE: self.hass.config.latitude,
             CONF_LONGITUDE: self.hass.config.longitude,
             CONF_THRESHOLD_ENTITY: DEFAULT_THRESHOLD_ENTITY,
@@ -73,7 +65,16 @@ class DwdNowcastConfigFlow(ConfigFlow, domain=DOMAIN):
             CONF_STEP_MINUTES: DEFAULT_STEP_MINUTES,
             CONF_HORIZON_MINUTES: DEFAULT_HORIZON_MINUTES,
         }
-        return self.async_show_form(step_id="user", data_schema=_schema(defaults))
+
+    async def async_step_user(
+        self, user_input: dict[str, Any] | None = None
+    ) -> ConfigFlowResult:
+        # Zero-config: create the entry instantly with sensible defaults
+        # (HA home coordinate + default threshold helper). No form to fill;
+        # everything is editable afterwards via the options flow.
+        await self.async_set_unique_id(DOMAIN)
+        self._abort_if_unique_id_configured()
+        return self.async_create_entry(title=TITLE, data=self._default_data())
 
     async def async_step_import(
         self, user_input: dict[str, Any] | None = None
