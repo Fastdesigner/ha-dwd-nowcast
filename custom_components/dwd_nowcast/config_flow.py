@@ -41,13 +41,6 @@ def _schema(defaults: dict[str, Any]) -> vol.Schema:
             ): selector.EntitySelector(
                 selector.EntitySelectorConfig(domain=["input_number", "number", "sensor"])
             ),
-            vol.Optional(
-                CONF_WARNING_ENTITY, default=defaults.get(CONF_WARNING_ENTITY, "")
-            ): selector.EntitySelector(
-                selector.EntitySelectorConfig(
-                    domain=["binary_sensor", "sensor"], multiple=False
-                )
-            ),
             vol.Required(
                 CONF_STEP_MINUTES, default=defaults[CONF_STEP_MINUTES]
             ): vol.All(vol.Coerce(int), vol.Range(min=5, max=30)),
