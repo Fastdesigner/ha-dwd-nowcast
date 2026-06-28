@@ -1,0 +1,13 @@
+{
+  "domain": "dwd_nowcast",
+  "name": "DWD Nowcast (RADVOR RV) – Hausstandort",
+  "codeowners": ["@Fastdesigner"],
+  "config_flow": true,
+  "dependencies": [],
+  "documentation": "https://github.com/Fastdesigner/ha-dwd-nowcast",
+  "integration_type": "service",
+  "iot_class": "cloud_polling",
+  "issue_tracker": "https://github.com/Fastdesigner/ha-dwd-nowcast/issues",
+  "requirements": ["numpy"],
+  "version": "0.1.0"
+}

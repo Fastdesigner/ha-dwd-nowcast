@@ -1,0 +1,36 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "DWD Nowcast – Hausstandort",
+        "description": "RADVOR-RV-Niederschlagsnowcast (Radar, 5-Min-Raster) für die exakte Hauskoordinate. Die Starkregen-Schwelle wird live aus dem gewählten Helfer gelesen (nicht hartkodiert).",
+        "data": {
+          "latitude": "Breitengrad",
+          "longitude": "Längengrad",
+          "threshold_entity": "Starkregen-Schwelle (Helfer, mm/h)",
+          "warning_entity": "DWD-Warnung (optional, nur als Hinweis)",
+          "step_minutes": "Intervall (Minuten)",
+          "horizon_minutes": "Vorhersagehorizont (Minuten)"
+        }
+      }
+    },
+    "abort": {
+      "already_configured": "DWD Nowcast ist bereits eingerichtet."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "DWD Nowcast – Einstellungen",
+        "data": {
+          "latitude": "Breitengrad",
+          "longitude": "Längengrad",
+          "threshold_entity": "Starkregen-Schwelle (Helfer, mm/h)",
+          "warning_entity": "DWD-Warnung (optional, nur als Hinweis)",
+          "step_minutes": "Intervall (Minuten)",
+          "horizon_minutes": "Vorhersagehorizont (Minuten)"
+        }
+      }
+    }
+  }
+}
